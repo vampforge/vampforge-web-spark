@@ -95,8 +95,8 @@ const Footer = () => {
               © {currentYear} VAMPForge. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-smooth">Privacy Policy</a>
-              <a href="#" className="hover:text-primary transition-smooth">Terms of Service</a>
+              <Link to="/privacy" className="hover:text-primary transition-smooth">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-primary transition-smooth">Terms of Service</Link>
             </div>
           </div>
         </div>

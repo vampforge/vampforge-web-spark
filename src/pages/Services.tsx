@@ -1,5 +1,8 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { 
   Code, 
   Globe, 
@@ -8,10 +11,17 @@ import {
   Database, 
   Shield,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Calendar
 } from 'lucide-react';
+import ServiceModal from '@/components/ServiceModal';
+import ScheduleCallForm from '@/components/ScheduleCallForm';
 
 const Services = () => {
+  const [selectedService, setSelectedService] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isScheduleFormOpen, setIsScheduleFormOpen] = useState(false);
+
   const services = [
     {
       icon: Code,
@@ -143,10 +153,26 @@ const Services = () => {
                   </div>
                 </div>
                 
-                <Button variant="outline" className="w-full">
-                  Learn More
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => {
+                      setSelectedService(service);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    Learn More
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="hero"
+                    size="sm"
+                    onClick={() => setIsScheduleFormOpen(true)}
+                  >
+                    <Calendar className="w-4 h-4" />
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -192,18 +218,45 @@ const Services = () => {
                 Let's discuss your project requirements and create a solution that drives your business forward.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="xl" variant="accent">
+                <Button size="xl" variant="accent" className="hover-scale">
                   Request a Quote
                   <ArrowRight className="w-5 h-5" />
                 </Button>
-                <Button size="xl" variant="glass">
+                <Button 
+                  size="xl" 
+                  variant="glass" 
+                  className="hover-scale"
+                  onClick={() => setIsScheduleFormOpen(true)}
+                >
                   Schedule Consultation
+                  <Calendar className="w-5 h-5" />
                 </Button>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* Service Modal */}
+      <ServiceModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        service={selectedService}
+        onScheduleCall={() => {
+          setIsModalOpen(false);
+          setIsScheduleFormOpen(true);
+        }}
+      />
+
+      {/* Schedule Call Dialog */}
+      <Dialog open={isScheduleFormOpen} onOpenChange={setIsScheduleFormOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Schedule a Consultation</DialogTitle>
+          </DialogHeader>
+          <ScheduleCallForm />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
