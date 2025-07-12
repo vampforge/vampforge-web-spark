@@ -175,32 +175,27 @@
   }
 
   /* Minimalist theme overrides */
-  .minimal-theme {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 20%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
-    --border: 0 0% 90%;
-    --primary: 0 0% 20%;
-    --primary-foreground: 0 0% 98%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --glass: 0 0% 100% / 0.8;
-    --glass-border: 0 0% 0% / 0.1;
+  /* Cursor pointer utilities */
+  .cursor-pointer {
+    cursor: pointer;
   }
 
-  .minimal-theme.dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
-    --border: 0 0% 15%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 8%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
-    --glass: 0 0% 0% / 0.8;
-    --glass-border: 0 0% 100% / 0.1;
+  .hover-pointer:hover {
+    cursor: pointer;
+  }
+
+  /* Additional button variants for glassmorphism */
+  .glass-button-variant {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .glass-button-variant:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   }
 
   .fade-in-up {

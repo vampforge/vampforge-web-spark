@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FileText, Edit, Eye, Save, Plus } from 'lucide-react';
 import { useCMSData } from '@/hooks/useCMSData';
+import DragDropPageBuilder from './DragDropPageBuilder';
 
 const CMSPageEditor = () => {
   const { cmsData, updatePage } = useCMSData();
@@ -136,15 +137,13 @@ const CMSPageEditor = () => {
             </TabsContent>
 
             <TabsContent value="content" className="space-y-4">
-              <div className="text-center py-8 border-2 border-dashed border-muted rounded-lg">
-                <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground mb-4">
-                  Visual Content Editor (Coming Soon)
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  This will include drag-and-drop components, rich text editing, and live preview.
-                </p>
-              </div>
+              <DragDropPageBuilder
+                pageId={editingPage.id}
+                initialSections={editingPage.sections || []}
+                onSave={(sections) => {
+                  setEditingPage(prev => ({ ...prev, sections }));
+                }}
+              />
             </TabsContent>
           </Tabs>
         </CardContent>
