@@ -177,7 +177,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center space-y-4 mb-16"
           >
-            <h2 className="text-title font-bold">
+            <h2 className="text-title font-bold contrast-heading">
               Trusted & <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Certified</span>
             </h2>
             <p className="text-subtitle text-muted-foreground max-w-2xl mx-auto">
@@ -187,10 +187,10 @@ const Home = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { name: 'ISO 9001 Certified', icon: '🏆' },
-              { name: 'Security Compliant', icon: '🔒' },
-              { name: '24/7 Support', icon: '⚡' },
-              { name: 'Agile Methodology', icon: '🚀' }
+              { name: 'ISO 9001 Certified', icon: Shield },
+              { name: 'Security Compliant', icon: Shield },
+              { name: '24/7 Support', icon: Zap },
+              { name: 'Agile Methodology', icon: Rocket }
             ].map((credential, index) => (
               <motion.div
                 key={index}
@@ -198,10 +198,15 @@ const Home = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center space-y-2"
+                className="text-center space-y-4"
               >
-                <div className="text-4xl">{credential.icon}</div>
-                <p className="text-sm font-medium">{credential.name}</p>
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-16 h-16 primary-gradient rounded-xl flex items-center justify-center mx-auto glass-card"
+                >
+                  <credential.icon className="w-8 h-8 text-primary-foreground" />
+                </motion.div>
+                <p className="text-sm font-medium contrast-text">{credential.name}</p>
               </motion.div>
             ))}
           </div>

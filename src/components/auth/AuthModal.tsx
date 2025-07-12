@@ -41,6 +41,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           description: "Welcome back to VAMPForge CMS!",
         });
         onClose();
+        // Redirect to CMS for admin only
+        if (formData.email === 'admin@vampforge.site') {
+          window.location.href = '/cms';
+        }
       } else {
         toast({
           title: "Login Failed",
@@ -56,6 +60,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           description: "Your account has been created!",
         });
         onClose();
+        // Regular users don't get CMS access
       } else {
         toast({
           title: "Signup Failed",
