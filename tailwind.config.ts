@@ -65,7 +65,17 @@ export default {
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
+				},
+				glass: {
+					DEFAULT: 'var(--glass)',
+					border: 'var(--glass-border)',
+					hover: 'var(--glass-hover)',
+					active: 'var(--glass-active)'
 				}
+			},
+			backdropBlur: {
+				glass: '20px',
+				heavy: '40px'
 			},
 			fontSize: {
 				'hero': 'var(--font-size-hero)',

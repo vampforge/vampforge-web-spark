@@ -5,25 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-hover hover-glow",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-light",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: "glass-button text-white shadow-lg hover:shadow-neon",
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline:
+          "border border-white/20 bg-white/5 backdrop-blur-lg text-white shadow-sm hover:bg-white/10 hover:shadow-glow",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "text-white/80 hover:bg-white/10 hover:text-white",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "primary-gradient text-primary-foreground hover:glow-effect hover-scale font-semibold shadow-lg",
-        tech: "tech-gradient text-card-dark-foreground hover:glow-effect hover-scale font-medium",
-        accent: "bg-accent text-accent-foreground hover:bg-accent-hover hover-scale",
-        glass: "glass-effect text-foreground hover:bg-white/20 border border-white/30",
+        hero: "neon-gradient text-white shadow-lg hover:shadow-neon transform hover:scale-105 transition-all duration-300",
+        glass: "glass-card text-white hover:bg-white/15 hover:shadow-glow",
+        accent: "bg-accent text-accent-foreground hover:bg-accent-hover hover-scale"
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-12 rounded-lg px-8 text-base",
+        sm: "h-9 rounded-lg px-3",
+        lg: "h-12 rounded-xl px-8",
         xl: "h-14 rounded-xl px-10 text-lg",
         icon: "h-10 w-10",
       },
