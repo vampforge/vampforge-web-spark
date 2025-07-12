@@ -40,10 +40,12 @@ export interface CMSPage {
 
 export interface FormResponse {
   id: string;
-  formType: 'contact' | 'schedule';
+  name: string;
+  email: string;
+  type: 'contact' | 'call' | 'project';
   data: Record<string, any>;
   timestamp: string;
-  read: boolean;
+  status: 'read' | 'unread';
 }
 
 export interface CMSData {

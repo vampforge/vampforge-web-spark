@@ -7,9 +7,10 @@ import {
   Users, 
   Code, 
   Lightbulb,
-  ArrowRight,
   CheckCircle
 } from 'lucide-react';
+import ProjectDialog from '@/components/ProjectDialog';
+import CallDialog from '@/components/CallDialog';
 
 const About = () => {
   const values = [
@@ -195,13 +196,8 @@ const About = () => {
                 Let's discuss how we can help transform your ideas into powerful digital solutions.
               </p>
               <div className="space-y-4">
-                <Button className="w-full" size="lg" variant="hero">
-                  Start Your Project
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-                <Button className="w-full" size="lg" variant="outline">
-                  Schedule a Call
-                </Button>
+                <ProjectDialog />
+                <CallDialog />
               </div>
             </CardContent>
           </Card>

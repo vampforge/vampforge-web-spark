@@ -65,7 +65,7 @@ const CMSDashboard = () => {
     },
     {
       title: 'Unread Responses',
-      value: cmsData.formResponses.filter(r => !r.read).length,
+      value: cmsData.formResponses.filter(r => r.status === 'unread').length,
       icon: Calendar,
       color: 'text-orange-500'
     },
@@ -174,14 +174,14 @@ const CMSDashboard = () => {
                                 {response.data.name || 'Anonymous'}
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                {response.formType === 'contact' ? 'Contact Form' : 'Schedule Call'}
+                                {response.type === 'contact' ? 'Contact Form' : response.type === 'call' ? 'Schedule Call' : 'Project Request'}
                               </p>
                               <p className="text-xs text-muted-foreground">
                                 {new Date(response.timestamp).toLocaleString()}
                               </p>
                             </div>
                             <div className="flex items-center space-x-2">
-                              {!response.read && (
+                              {response.status === 'unread' && (
                                 <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                               )}
                               <Button

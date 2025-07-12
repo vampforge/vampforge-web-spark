@@ -172,6 +172,35 @@
     background: var(--gradient-mesh), hsl(var(--background));
   }
 
+  /* Minimalist theme overrides */
+  .minimal-theme {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    --border: 0 0% 90%;
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 98%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --glass: 0 0% 100% / 0.8;
+    --glass-border: 0 0% 0% / 0.1;
+  }
+
+  .minimal-theme.dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --border: 0 0% 15%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 8%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --glass: 0 0% 0% / 0.8;
+    --glass-border: 0 0% 100% / 0.1;
+  }
+
   .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
   }

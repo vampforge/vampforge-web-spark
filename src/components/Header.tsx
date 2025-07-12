@@ -31,13 +31,8 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 transition-smooth hover:scale-105">
-            <img 
-              src={vampforgeLogo} 
-              alt="VAMPForge Logo" 
-              className="h-10 w-10 object-contain"
-            />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <Link to="/" className="cursor-pointer transition-smooth hover:scale-105">
+            <span className="text-xl font-bold text-foreground">
               VAMPForge
             </span>
           </Link>

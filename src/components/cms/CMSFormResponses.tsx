@@ -12,11 +12,12 @@ const CMSFormResponses = () => {
   const { toast } = useToast();
   const [selectedResponse, setSelectedResponse] = useState<any>(null);
 
-  const contactResponses = cmsData.formResponses.filter(r => r.formType === 'contact');
-  const scheduleResponses = cmsData.formResponses.filter(r => r.formType === 'schedule');
+  const contactResponses = cmsData.formResponses.filter(r => r.type === 'contact');
+  const scheduleResponses = cmsData.formResponses.filter(r => r.type === 'call');
+  const projectResponses = cmsData.formResponses.filter(r => r.type === 'project');
 
   const handleMarkAsRead = (responseId: string) => {
-    updateFormResponse(responseId, { read: true });
+    updateFormResponse(responseId, { status: 'read' });
     toast({
       title: "Marked as Read",
       description: "Response has been marked as read.",
@@ -38,7 +39,7 @@ const CMSFormResponses = () => {
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 rounded-full bg-primary"></div>
           <span className="font-medium">{response.data.name || 'Anonymous'}</span>
-          {!response.read && (
+          {response.status === 'unread' && (
             <Badge variant="secondary" className="text-xs">New</Badge>
           )}
         </div>
@@ -50,7 +51,7 @@ const CMSFormResponses = () => {
           >
             <Eye className="w-4 h-4" />
           </Button>
-          {!response.read && (
+          {response.status === 'unread' && (
             <Button
               variant="ghost"
               size="sm"
@@ -97,7 +98,7 @@ const CMSFormResponses = () => {
               <Button variant="outline" onClick={() => setSelectedResponse(null)}>
                 Back
               </Button>
-              {!selectedResponse.read && (
+              {selectedResponse.status === 'unread' && (
                 <Button onClick={() => handleMarkAsRead(selectedResponse.id)}>
                   <Check className="w-4 h-4 mr-2" />
                   Mark as Read
@@ -118,7 +119,7 @@ const CMSFormResponses = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Form Type</label>
-                <p className="text-lg font-medium capitalize">{selectedResponse.formType}</p>
+                <p className="text-lg font-medium capitalize">{selectedResponse.type}</p>
               </div>
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Submitted</label>
@@ -140,13 +141,13 @@ const CMSFormResponses = () => {
             </div>
 
             <div className="flex items-center space-x-2 p-3 bg-muted/50 rounded">
-              {selectedResponse.read ? (
+              {selectedResponse.status === 'read' ? (
                 <Check className="w-4 h-4 text-green-500" />
               ) : (
                 <Clock className="w-4 h-4 text-orange-500" />
               )}
               <span className="text-sm">
-                {selectedResponse.read ? 'Read' : 'Unread'}
+                {selectedResponse.status === 'read' ? 'Read' : 'Unread'}
               </span>
             </div>
           </div>
@@ -170,6 +171,10 @@ const CMSFormResponses = () => {
             <TabsTrigger value="schedule" className="flex items-center space-x-2">
               <Calendar className="w-4 h-4" />
               <span>Schedule Calls ({scheduleResponses.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="project" className="flex items-center space-x-2">
+              <MessageSquare className="w-4 h-4" />
+              <span>Projects ({projectResponses.length})</span>
             </TabsTrigger>
           </TabsList>
 
@@ -198,6 +203,21 @@ const CMSFormResponses = () => {
               <div className="space-y-4">
                 {scheduleResponses.map((response) => (
                   <ResponseCard key={response.id} response={response} type="schedule" />
+                ))}
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="project" className="space-y-4">
+            {projectResponses.length === 0 ? (
+              <div className="text-center py-8">
+                <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">No project requests yet</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {projectResponses.map((response) => (
+                  <ResponseCard key={response.id} response={response} type="project" />
                 ))}
               </div>
             )}

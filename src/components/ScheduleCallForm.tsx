@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, Clock, User, Mail, MessageSquare, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useCMSData } from '@/hooks/useCMSData';
 
 interface ScheduleCallFormData {
   name: string;
@@ -32,6 +33,7 @@ const ScheduleCallForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const { addFormResponse } = useCMSData();
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -69,17 +71,16 @@ const ScheduleCallForm = () => {
 
     setIsLoading(true);
 
-    // Simulate API call
+    // Simulate API call and save to CMS
     setTimeout(() => {
-      // Store in localStorage for CMS access
-      const existingData = JSON.parse(localStorage.getItem('scheduleCallData') || '[]');
-      const newEntry = {
-        id: Date.now(),
-        ...formData,
-        submittedAt: new Date().toISOString(),
-        type: 'schedule_call'
-      };
-      localStorage.setItem('scheduleCallData', JSON.stringify([...existingData, newEntry]));
+      // Add to CMS
+      addFormResponse({
+        name: formData.name,
+        email: formData.email,
+        type: 'call',
+        data: formData,
+        status: 'unread'
+      });
 
       setIsLoading(false);
       setIsSubmitted(true);

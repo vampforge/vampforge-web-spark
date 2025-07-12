@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useCMSData } from '@/hooks/useCMSData';
 
 interface FormData {
   name: string;
@@ -29,6 +30,7 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const { addFormResponse } = useCMSData();
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -78,8 +80,17 @@ const ContactForm = () => {
 
     setIsSubmitting(true);
 
-    // Simulate API call
+    // Simulate API call and save to CMS
     setTimeout(() => {
+      // Add to CMS
+      addFormResponse({
+        name: formData.name,
+        email: formData.email,
+        type: 'contact',
+        data: formData,
+        status: 'unread'
+      });
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       
