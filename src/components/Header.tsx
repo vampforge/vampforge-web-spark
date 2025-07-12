@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Settings, Users, Phone, LogOut, Home, Shield, FileText } from 'lucide-react';
+import { Menu, X, Settings, Users, Phone, LogOut, Home, Shield, FileText, FileX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { RequestQuoteForm } from '@/components/RequestQuoteForm';
 import { useAuth } from '@/hooks/useAuth';
-import vampforgeLogo from '@/assets/vampforge-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const location = useLocation();
   const { user, isAuthenticated, isAdmin, login, signup, logout } = useAuth();
 
@@ -67,6 +69,22 @@ const Header = () => {
 
           {/* Auth Actions */}
           <div className="flex items-center space-x-4">
+            {/* Request Quote CTA */}
+            <Dialog open={isQuoteModalOpen} onOpenChange={setIsQuoteModalOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  className="glass-button primary-gradient hidden sm:flex"
+                  size="sm"
+                >
+                  <FileX className="w-4 h-4 mr-2" />
+                  Request Quote
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-transparent border-none p-0">
+                <RequestQuoteForm onClose={() => setIsQuoteModalOpen(false)} />
+              </DialogContent>
+            </Dialog>
+
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 <span className="text-sm text-muted-foreground hidden sm:block">
@@ -108,6 +126,19 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border shadow-lg">
             <nav className="px-4 py-6 space-y-2">
+              {/* Mobile Request Quote Button */}
+              <Button 
+                onClick={() => {
+                  setIsQuoteModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="w-full glass-button primary-gradient mb-4"
+                size="sm"
+              >
+                <FileX className="w-4 h-4 mr-2" />
+                Request Quote
+              </Button>
+
               {navItems.map((item) => (
                 <Link
                   key={item.name}

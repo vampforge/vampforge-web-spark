@@ -74,13 +74,13 @@ const Contact = () => {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Phone className="w-5 h-5 text-primary" />
-                  <span>Founder Contact</span>
+                  <span>Direct Contact</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold">Aman Jaiswal</h4>
-                  <p className="text-muted-foreground text-sm">Founder & Lead Developer</p>
+                  <h4 className="font-semibold">VAMPForge Team</h4>
+                  <p className="text-muted-foreground text-sm">Professional Development Services</p>
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">

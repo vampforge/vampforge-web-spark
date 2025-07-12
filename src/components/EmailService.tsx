@@ -6,7 +6,7 @@ export interface EmailData {
   message: string;
   projectType?: string;
   preferredDate?: string;
-  formType: 'contact' | 'schedule';
+  formType: 'contact' | 'schedule' | 'quote';
 }
 
 class EmailService {

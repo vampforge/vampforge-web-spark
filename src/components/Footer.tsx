@@ -63,9 +63,6 @@ const Footer = () => {
                 <Mail className="w-4 h-4 text-primary" />
                 <span className="text-muted-foreground">support@vampforge.site</span>
               </div>
-              <div className="text-muted-foreground">
-                <p className="font-medium">Founder: Aman Jaiswal</p>
-              </div>
             </div>
           </div>
 

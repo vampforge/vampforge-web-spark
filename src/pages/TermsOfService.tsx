@@ -135,7 +135,7 @@ const TermsOfService = () => {
               <div className="space-y-2 text-sm">
                 <p><strong>Email:</strong> support@vampforge.site</p>
                 <p><strong>Phone:</strong> 7464003631</p>
-                <p><strong>Founder:</strong> Aman Jaiswal</p>
+                <p><strong>Company:</strong> VAMPForge Solutions</p>
               </div>
             </CardContent>
           </Card>

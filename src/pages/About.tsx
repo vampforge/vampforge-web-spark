@@ -75,8 +75,8 @@ const About = () => {
                 <User className="w-8 h-8 text-primary-foreground" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold">Aman Jaiswal</h2>
-                <p className="text-muted-foreground">Founder & Lead Developer</p>
+                <h2 className="text-2xl font-bold">Leadership Team</h2>
+                <p className="text-muted-foreground">Experienced Professionals</p>
               </div>
             </div>
             

@@ -42,7 +42,7 @@ export interface FormResponse {
   id: string;
   name: string;
   email: string;
-  type: 'contact' | 'call' | 'project';
+  type: 'contact' | 'call' | 'project' | 'quote';
   data: Record<string, any>;
   timestamp: string;
   status: 'read' | 'unread';

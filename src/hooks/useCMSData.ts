@@ -38,8 +38,8 @@ const DEFAULT_CMS_DATA: CMSData = {
       content: [],
       seo: {
         metaTitle: 'About VAMPForge',
-        metaDescription: 'Learn about VAMPForge, our founder Aman Jaiswal, and our mission',
-        keywords: 'about VAMPForge, Aman Jaiswal, software company, mission'
+        metaDescription: 'Learn about VAMPForge, our leadership team, and our mission',
+        keywords: 'about VAMPForge, software company, mission, team'
       }
     },
     {
