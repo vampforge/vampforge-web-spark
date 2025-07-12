@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, Code, Zap, Shield, Users } from 'lucide-react';
+import { FloatingCard } from '@/components/ui/floating-card';
+import { ArrowRight, Code, Zap, Shield, Users, Star, ChevronDown, Rocket } from 'lucide-react';
 import CustomerReviews from '@/components/CustomerReviews';
 import heroImage from '@/assets/hero-image.jpg';
+import vampforgeLogo from '@/assets/vampforge-logo.png';
 
 const Home = () => {
   const features = [
@@ -33,103 +35,88 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 opacity-10">
-          <img 
-            src={heroImage} 
-            alt="VAMPForge Technology Background" 
-            className="w-full h-full object-cover"
-          />
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-primary/30 to-transparent rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-accent/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-secondary/20 to-transparent rounded-full blur-3xl animate-pulse delay-2000" />
         </div>
         
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6"
             >
-              <div className="space-y-4">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                  className="text-4xl lg:text-hero font-bold leading-tight"
-                >
-                  Welcome to{' '}
-                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    VAMPForge
-                  </span>
-                </motion.h1>
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-subtitle text-muted-foreground leading-relaxed"
-                >
-                  Your trusted partner for innovative software development and IT solutions. 
-                  We transform ideas into powerful digital experiences that drive business growth.
-                </motion.p>
+              <div className="inline-flex items-center px-4 py-2 glass-card rounded-full text-sm font-medium text-primary">
+                <Star className="w-4 h-4 mr-2" />
+                Welcome to the Future of Software Development
               </div>
               
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Button asChild size="xl" variant="hero" className="hover-scale">
-                  <Link to="/contact">
-                    Start Your Project
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </Button>
-                <Button asChild size="xl" variant="outline" className="hover-scale">
-                  <Link to="/services">
-                    Explore Services
-                  </Link>
-                </Button>
-              </motion.div>
+              <h1 className="text-4xl lg:text-hero font-bold bg-gradient-to-r from-white via-primary to-accent bg-clip-text text-transparent leading-tight">
+                Building Tomorrow's
+                <br />
+                <span className="neon-text">Digital Solutions</span>
+              </h1>
               
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                className="flex items-center space-x-8 pt-4"
-              >
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">50+</div>
-                  <div className="text-sm text-muted-foreground">Projects Delivered</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">5+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">24/7</div>
-                  <div className="text-sm text-muted-foreground">Support</div>
-                </div>
-              </motion.div>
+              <p className="text-subtitle text-muted-foreground max-w-3xl mx-auto">
+                VAMPForge delivers cutting-edge software development and IT consulting services 
+                that transform your ideas into powerful digital experiences.
+              </p>
             </motion.div>
             
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="relative"
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <div className="card-gradient rounded-xl p-8 card-shadow hover-scale">
-                <img 
-                  src={heroImage} 
-                  alt="VAMPForge Development" 
-                  className="w-full h-auto rounded-lg"
-                />
-              </div>
+              <Link to="/contact">
+                <Button size="lg" className="glass-button text-lg px-8 py-4 group">
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              
+              <Link to="/services">
+                <Button variant="outline" size="lg" className="glass-button text-lg px-8 py-4">
+                  Explore Services
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+            >
+              {[
+                { number: '100+', label: 'Projects Delivered' },
+                { number: '50+', label: 'Happy Clients' },
+                { number: '24/7', label: 'Support Available' },
+                { number: '99.9%', label: 'Uptime Guarantee' }
+              ].map((stat, index) => (
+                <FloatingCard key={index} variant="glass" className="text-center p-4">
+                  <div className="text-2xl font-bold text-primary">{stat.number}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </FloatingCard>
+              ))}
             </motion.div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown className="w-6 h-6 text-muted-foreground" />
+        </motion.div>
       </section>
 
       {/* Features Section */}

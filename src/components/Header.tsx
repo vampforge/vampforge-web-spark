@@ -1,32 +1,42 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code, Settings, Users, Phone, LogIn } from 'lucide-react';
+import { Menu, X, Settings, Users, Phone, LogOut, Home, Shield, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { AuthModal } from '@/components/auth/AuthModal';
+import { useAuth } from '@/hooks/useAuth';
+import vampforgeLogo from '@/assets/vampforge-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
+  const { user, isAuthenticated, isAdmin, login, signup, logout } = useAuth();
 
   const navItems = [
-    { name: 'Home', path: '/', icon: Code, description: 'Welcome to VAMPForge' },
-    { name: 'Services', path: '/services', icon: Settings, description: 'Explore our software development and IT solutions' },
-    { name: 'About', path: '/about', icon: Users, description: 'Learn about our company and founder' },
-    { name: 'Contact', path: '/contact', icon: Phone, description: 'Get in touch with our team' },
-    { name: 'CMS', path: '/cms', icon: LogIn, description: 'Login or Signup to access your dashboard' },
+    { name: 'Home', path: '/', icon: Home, description: 'Welcome to VAMPForge' },
+    { name: 'Services', path: '/services', icon: Settings, description: 'Software & IT Solutions' },
+    { name: 'About', path: '/about', icon: Users, description: 'Our Story & Mission' },
+    { name: 'Contact', path: '/contact', icon: Phone, description: 'Get in Touch' },
+    { name: 'Privacy Policy', path: '/privacy-policy', icon: Shield, description: 'Data Protection' },
+    { name: 'Terms of Service', path: '/terms-of-service', icon: FileText, description: 'Service Terms' },
+    ...(isAuthenticated ? [{ name: 'Dashboard', path: '/cms', icon: Settings, description: 'Admin Panel' }] : []),
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-border">
+    <>
+      <header className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 transition-smooth hover:scale-105">
-            <div className="w-8 h-8 primary-gradient rounded-lg flex items-center justify-center">
-              <Code className="w-5 h-5 text-primary-foreground" />
-            </div>
+          <Link to="/" className="flex items-center space-x-3 transition-smooth hover:scale-105">
+            <img 
+              src={vampforgeLogo} 
+              alt="VAMPForge Logo" 
+              className="h-10 w-10 object-contain"
+            />
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               VAMPForge
             </span>
@@ -60,15 +70,43 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          {/* Auth Actions */}
+          <div className="flex items-center space-x-4">
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-muted-foreground hidden sm:block">
+                  Welcome, {user?.name}
+                </span>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={logout}
+                  className="glass-button"
+                  title="Logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
+            ) : (
+              <Button 
+                onClick={() => setIsAuthModalOpen(true)}
+                className="glass-button"
+                size="sm"
+              >
+                Login
+              </Button>
+            )}
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden glass-button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -99,6 +137,15 @@ const Header = () => {
         )}
       </div>
     </header>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLogin={login}
+        onSignup={signup}
+      />
+    </>
   );
 };
 
